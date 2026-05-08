@@ -67,7 +67,7 @@ export default function ContactSection() {
             {submitted ? (
               <div className="text-center py-8">
                 <div className="text-4xl mb-3">✅</div>
-                <p className="text-green-400 font-semibold">Message sent! We'll be in touch soon.</p>
+                <p className="text-green-400 font-semibold">Message sent! We&apos;ll be in touch soon.</p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="flex flex-col gap-3">

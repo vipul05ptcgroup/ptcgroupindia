@@ -43,7 +43,7 @@ export default function AboutSection() {
             <p className="text-gray-600 text-base leading-relaxed mb-8">
               Headquartered in Virar(E), Palghar, Mumbai, our group companies serve thousands of
               clients across India and export to global markets — driven by our founding philosophy:{' '}
-              <em className="text-gold-600 font-medium not-italic">"Big or Small, We Trade All."</em>
+              <em className="text-gold-600 font-medium not-italic">&quot;Big or Small, We Trade All.&quot;</em>
             </p>
             <div className="flex flex-wrap gap-3">
               <a
