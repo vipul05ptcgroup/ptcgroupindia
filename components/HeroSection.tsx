@@ -1,0 +1,109 @@
+'use client'
+import Image from 'next/image'
+import { useEffect, useState } from 'react'
+import { GROUP_STATS } from '@/lib/companies'
+
+function useCountUp(target: number, duration = 2000) {
+  const [count, setCount] = useState(0)
+  useEffect(() => {
+    const steps = 60
+    let step = 0
+    const timer = setInterval(() => {
+      step++
+      const ease = 1 - Math.pow(1 - step / steps, 3)
+      setCount(Math.round(target * ease))
+      if (step >= steps) clearInterval(timer)
+    }, duration / steps)
+    return () => clearInterval(timer)
+  }, [target, duration])
+  return count
+}
+
+function StatBox({ value, label }: { value: string; label: string }) {
+  const numericPart = parseInt(value.replace('+', ''))
+  const suffix = value.includes('+') ? '+' : ''
+  const animated = useCountUp(numericPart)
+
+  return (
+    <div className="bg-navy-900/70 px-4 py-4 text-center">
+      <div className="text-2xl md:text-3xl font-black text-gold-500 leading-none">
+        {animated}
+        {suffix}
+      </div>
+      <div className="text-[9px] text-gray-500 tracking-[0.2em] uppercase mt-1">{label}</div>
+    </div>
+  )
+}
+
+const SERVICE_TAGS = ['Chemicals', 'Logistics', 'Organics', 'Beverages', 'Packaging', 'Technology', 'Innovation', 'Creative']
+
+export default function HeroSection() {
+  return (
+    <section
+      id="home"
+      className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-navy-950 via-navy-900 to-navy-800 pt-20 pb-16 px-6 md:px-10"
+    >
+      <div className="absolute inset-0 bg-hero-grid bg-grid opacity-100 pointer-events-none" />
+
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-gold-500/[0.05] blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-navy-600/40 blur-3xl pointer-events-none" />
+
+      <div className="relative z-10 max-w-7xl mx-auto w-full">
+        <div className="max-w-3xl">
+          <div className="inline-flex items-center gap-3 bg-gold-500/10 border border-gold-500/30 rounded-full px-4 py-1.5 mb-7">
+            <Image
+              src="/Images/Favicon.png"
+              alt="PTC Group icon"
+              width={18}
+              height={18}
+              className="favicon-spin h-[16px] w-[16px] md:h-[18px] md:w-[18px]"
+            />
+            <span className="text-gold-500 text-[10px] font-bold tracking-[0.2em] uppercase">
+              Trusted Since 2009
+            </span>
+          </div>
+
+          <h1 className="font-serif font-black text-white leading-tight text-5xl md:text-7xl">One Group.</h1>
+          <h1 className="font-serif font-black text-gold-500 leading-tight text-5xl md:text-7xl mb-6">Many Ventures.</h1>
+
+          <p className="text-gray-400 text-base md:text-lg leading-relaxed max-w-xl mb-9">
+            PTC Group India is a diversified conglomerate spanning chemicals, logistics, organics, beverages,
+            packaging, technology and creative services - united by one vision.
+          </p>
+
+          <div className="flex flex-wrap gap-4 mb-10">
+            <a
+              href="#companies"
+              className="bg-gold-500 hover:bg-gold-600 text-white text-xs font-bold tracking-widest uppercase px-8 py-4 rounded transition-all duration-200 hover:-translate-y-0.5"
+            >
+              Explore Companies
+            </a>
+            <a
+              href="#about"
+              className="border border-gold-500/40 hover:bg-gold-500/10 text-gold-500 text-xs font-bold tracking-widest uppercase px-8 py-4 rounded transition-all duration-200 hover:-translate-y-0.5"
+            >
+              About the Group
+            </a>
+          </div>
+
+          <div className="grid grid-cols-4 gap-px bg-gold-500/15 rounded-lg overflow-hidden border border-gold-500/15 max-w-lg">
+            {GROUP_STATS.map((stat) => (
+              <StatBox key={stat.label} value={stat.value} label={stat.label.split(' ')[0]} />
+            ))}
+          </div>
+
+          <div className="flex flex-wrap gap-2 mt-6">
+            {SERVICE_TAGS.map((tag) => (
+              <span
+                key={tag}
+                className="bg-white/5 border border-white/10 text-gray-400 text-[10px] font-semibold tracking-wide px-3 py-1.5 rounded-full"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
