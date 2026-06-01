@@ -1,4 +1,6 @@
-import { notFound } from 'next/navigation'
+﻿import { notFound, permanentRedirect } from 'next/navigation'
+import type { Metadata } from 'next'
+import Image from 'next/image'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import { COMPANIES } from '@/lib/companies'
@@ -9,21 +11,144 @@ interface CompanyDetailPageProps {
   }
 }
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || 'https://ptcgroupindia.in'
+const OG_IMAGE = `${SITE_URL}/Images/Logo.png`
+
+function getCompanyById(id: string) {
+  return COMPANIES.find((item) => item.id === id)
+}
+
+const LEGACY_ID_REDIRECTS: Record<string, string> = {
+  ptclogistics: 'ptc-logistics',
+  thefuturex: 'the-futurex',
+  devangorganics: 'devang-organics',
+  'himalayan-brewery': 'the-himalayan-brewery',
+  'himalayan-store': 'the-himalayan-store',
+  zauracare: 'zaura-care',
+  sspackaging: 'ss-packaging',
+}
+
 export function generateStaticParams() {
   return COMPANIES.map((company) => ({ id: company.id }))
 }
 
+export function generateMetadata({ params }: CompanyDetailPageProps): Metadata {
+  const normalizedId = params.id.toLowerCase()
+  const resolvedId = LEGACY_ID_REDIRECTS[normalizedId] || normalizedId
+  const company = getCompanyById(resolvedId)
+
+  if (!company) {
+    return {
+      title: 'Company Not Found | PTC Group India',
+      description: 'The requested company page could not be found.',
+      robots: { index: false, follow: false },
+    }
+  }
+
+  const canonicalUrl = `${SITE_URL}/companies/${company.id}`
+  const title = `${company.name} | ${company.tagline} | PTC Group India`
+  const description = company.longDesc || company.desc
+
+  return {
+    title,
+    description,
+    keywords: [company.name, company.category, company.tagline, ...(company.offerings || [])],
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+    openGraph: {
+      title,
+      description,
+      url: canonicalUrl,
+      siteName: 'PTC Group India',
+      type: 'website',
+      images: [
+        {
+          url: OG_IMAGE,
+          width: 1200,
+          height: 630,
+          alt: `${company.name} - ${company.tagline}`,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [OG_IMAGE],
+    },
+  }
+}
+
 export default function CompanyDetailPage({ params }: CompanyDetailPageProps) {
-  const company = COMPANIES.find((item) => item.id === params.id)
+  const normalizedId = params.id.toLowerCase()
+  const legacyRedirectId = LEGACY_ID_REDIRECTS[normalizedId]
+
+  if (legacyRedirectId) {
+    permanentRedirect(`/companies/${legacyRedirectId}`)
+  }
+
+  if (params.id !== normalizedId) {
+    permanentRedirect(`/companies/${normalizedId}`)
+  }
+
+  const company = getCompanyById(normalizedId)
 
   if (!company) notFound()
 
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+      { '@type': 'ListItem', position: 2, name: 'Companies', item: `${SITE_URL}/companies` },
+      { '@type': 'ListItem', position: 3, name: company.name, item: `${SITE_URL}/companies/${company.id}` },
+    ],
+  }
+
+  const productSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: company.name,
+    description: company.longDesc || company.desc,
+    category: company.category,
+    brand: {
+      '@type': 'Brand',
+      name: company.name,
+    },
+    url: `${SITE_URL}/companies/${company.id}`,
+    image: OG_IMAGE,
+    additionalProperty: [
+      { '@type': 'PropertyValue', name: 'Tagline', value: company.tagline },
+      { '@type': 'PropertyValue', name: 'Stats', value: company.stats },
+      ...(company.founded ? [{ '@type': 'PropertyValue', name: 'Founded', value: company.founded }] : []),
+      ...(company.headquarters ? [{ '@type': 'PropertyValue', name: 'Headquarters', value: company.headquarters }] : []),
+    ],
+  }
+
   return (
     <main>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }} />
       <Navbar />
 
       <section className="bg-navy-950 pt-24 sm:pt-32 pb-12 sm:pb-20 px-4 sm:px-6 md:px-10">
         <div className="max-w-6xl mx-auto">
+          <div className="mb-5">
+            <Image
+              src="/Images/Logo.png"
+              alt={`${company.name} official brand logo`}
+              width={220}
+              height={58}
+              priority
+              sizes="220px"
+              quality={85}
+            />
+          </div>
           <p className="text-[10px] tracking-[0.16em] sm:tracking-[0.2em] uppercase text-gold-400 font-bold mb-3">
             {company.category}
           </p>
@@ -222,3 +347,4 @@ export default function CompanyDetailPage({ params }: CompanyDetailPageProps) {
     </main>
   )
 }
+

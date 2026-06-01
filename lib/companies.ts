@@ -83,7 +83,7 @@ export const COMPANIES: Company[] = [
     sourceUrls: ['https://ptcgram.com', 'https://ptcgram.com/about/', 'https://www.indiamart.com/ptc-mumbai/about-us.html'],
   },
   {
-    id: 'ptclogistics',
+    id: 'ptc-logistics',
     name: 'PTC Logistics',
     tagline: 'Pan India Transport and Global Logistics',
     desc: 'Leading integrated logistics and mobility solutions provider with over a decade of experience, catering to 400+ clients including Godrej and pharmaceutical sector majors.',
@@ -182,7 +182,7 @@ export const COMPANIES: Company[] = [
     sourceUrls: ['https://ilika.in', 'https://www.ilika.in/about%20us/', 'https://www.ilika.in/hair-care/', 'https://about.me/ilika'],
   },
   {
-    id: 'thefuturex',
+    id: 'the-futurex',
     name: 'The FutureX',
     tagline: 'Smart Wearables Brand',
     desc: "Indian technology brand offering a full range of smart wearables - smart bands, smart rings, and smart watches - designed for connected, fitness-focused lifestyles.",
@@ -267,7 +267,7 @@ export const COMPANIES: Company[] = [
     sourceUrls: ['https://kedos.in'],
   },
   {
-    id: 'devangorganics',
+    id: 'devang-organics',
     name: 'Devang Organics',
     tagline: 'Organic Ingredient Products',
     desc: 'Organic ingredient supplier and product brand serving food, wellness, and clean-label formulation markets for both consumer and industrial clients across India.',
@@ -310,7 +310,7 @@ export const COMPANIES: Company[] = [
     sourceUrls: ['https://www.devangorganics.com/'],
   },
   {
-    id: 'himalayan-brewery',
+    id: 'the-himalayan-brewery',
     name: 'The Himalayan Brewery',
     tagline: 'Crafted in the Mountains',
     desc: 'Artisan beverage brand inspired by Himalayan purity, crafting premium beverages from pristine glacial waters for modern lifestyle and hospitality markets.',
@@ -350,7 +350,7 @@ export const COMPANIES: Company[] = [
     sourceUrls: ['https://thehimalayanbrewery.com'],
   },
   {
-    id: 'himalayan-store',
+    id: 'the-himalayan-store',
     name: 'The Himalayan Store',
     tagline: 'Mountain Essentials',
     desc: 'Curated e-commerce platform offering authentic Himalayan goods - foods, wellness products, and lifestyle items - sourced from the mountain regions of India.',
@@ -392,7 +392,7 @@ export const COMPANIES: Company[] = [
     sourceUrls: ['https://thehimalayanstore.shop'],
   },
   {
-    id: 'zauracare',
+    id: 'zaura-care',
     name: 'Zaura Care',
     tagline: 'Medical Product Range',
     desc: 'Healthcare product brand offering medical-grade consumables, rapid diagnostic test kits, and clinical essentials for hospitals, clinics, and medical distribution partners.',
@@ -435,7 +435,7 @@ export const COMPANIES: Company[] = [
     sourceUrls: ['https://www.zauracare.com/'],
   },
   {
-    id: 'sspackaging',
+    id: 'ss-packaging',
     name: 'SS Packaging',
     tagline: 'Bottle and Container Packaging',
     desc: 'Premium packaging solutions provider specializing in bottles, containers, jars, and cosmetic packaging sets for beauty, personal care, and retail brands across India.',

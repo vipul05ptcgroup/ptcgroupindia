@@ -73,7 +73,7 @@ export default function AboutSection() {
                     {year}
                   </div>
                   <div>
-                    <h4 className="text-white text-sm sm:text-base font-bold">{title}</h4>
+                    <h3 className="text-white text-sm sm:text-base font-bold">{title}</h3>
                     <p className="text-xs sm:text-sm text-gray-300">{desc}</p>
                   </div>
                 </div>
@@ -111,7 +111,7 @@ export default function AboutSection() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {VALUES.map((v) => (
               <div key={v.title} className="bg-white/5 border border-white/10 rounded-lg p-5 sm:p-6">
-                <h4 className="text-white text-base sm:text-lg font-bold mb-2">{v.title}</h4>
+                <h3 className="text-white text-base sm:text-lg font-bold mb-2">{v.title}</h3>
                 <p className="text-xs sm:text-sm text-gray-300 leading-relaxed">{v.desc}</p>
               </div>
             ))}

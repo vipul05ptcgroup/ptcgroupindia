@@ -164,7 +164,7 @@ export default function HomeSections() {
                     {step.year === 'Today' ? 'Now' : step.year.slice(-2)}
                   </div>
                   <div>
-                    <h4 className="text-white font-bold">{step.title}</h4>
+                    <h3 className="text-white font-bold">{step.title}</h3>
                     <p className="text-sm text-gray-300 mt-1">{step.desc}</p>
                   </div>
                 </div>

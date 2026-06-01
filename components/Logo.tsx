@@ -16,10 +16,12 @@ export default function Logo({ size = 'md' }: LogoProps) {
     <div className="shrink-0">
       <Image
         src="/Images/Logo.png"
-        alt="PTC Group India"
+        alt="PTC Group India official logo"
         width={s.width}
         height={s.height}
         priority
+        sizes="(max-width: 640px) 140px, (max-width: 768px) 160px, (max-width: 1024px) 190px, 210px"
+        quality={85}
         className="h-auto w-[140px] sm:w-[160px] md:w-[190px] lg:w-[210px]"
       />
     </div>

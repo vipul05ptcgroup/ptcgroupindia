@@ -53,9 +53,12 @@ export default function HeroSection() {
           <div className="inline-flex items-center gap-2 sm:gap-3 bg-gold-500/10 border border-gold-500/30 rounded-full px-3 sm:px-4 py-1.5 mb-6 sm:mb-7">
             <Image
               src="/Images/Favicon.png"
-              alt="PTC Group icon"
+              alt="PTC Group trusted since 2009 badge icon"
               width={18}
               height={18}
+              priority
+              sizes="18px"
+              quality={80}
               className="favicon-spin h-[16px] w-[16px] md:h-[18px] md:w-[18px]"
             />
             <span className="text-gold-500 text-[9px] sm:text-[10px] font-bold tracking-[0.14em] sm:tracking-[0.2em] uppercase">
@@ -63,8 +66,10 @@ export default function HeroSection() {
             </span>
           </div>
 
-          <h1 className="font-serif font-black text-white leading-tight text-4xl sm:text-5xl md:text-7xl">{HERO_CONTENT.titleLine1}</h1>
-          <h1 className="font-serif font-black text-gold-500 leading-tight text-4xl sm:text-5xl md:text-7xl mb-5 sm:mb-6">{HERO_CONTENT.titleLine2}</h1>
+          <h1 className="font-serif font-black leading-tight text-4xl sm:text-5xl md:text-7xl mb-5 sm:mb-6">
+            <span className="block text-white">{HERO_CONTENT.titleLine1}</span>
+            <span className="block text-gold-500">{HERO_CONTENT.titleLine2}</span>
+          </h1>
 
           <p className="text-gray-400 text-sm sm:text-base md:text-lg leading-relaxed max-w-xl mb-7 sm:mb-9">
             {HERO_CONTENT.description}
