@@ -1,7 +1,9 @@
 'use client'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { GROUP_STATS } from '@/lib/companies'
+import { HERO_CONTENT } from '@/lib/sitedata'
 
 function useCountUp(target: number, duration = 2000) {
   const [count, setCount] = useState(0)
@@ -35,8 +37,6 @@ function StatBox({ value, label }: { value: string; label: string }) {
   )
 }
 
-const SERVICE_TAGS = ['Chemicals', 'Logistics', 'Organics', 'Beverages', 'Packaging', 'Technology', 'Innovation', 'Creative']
-
 export default function HeroSection() {
   return (
     <section
@@ -59,31 +59,30 @@ export default function HeroSection() {
               className="favicon-spin h-[16px] w-[16px] md:h-[18px] md:w-[18px]"
             />
             <span className="text-gold-500 text-[10px] font-bold tracking-[0.2em] uppercase">
-              Trusted Since 2009
+              {HERO_CONTENT.badge}
             </span>
           </div>
 
-          <h1 className="font-serif font-black text-white leading-tight text-5xl md:text-7xl">One Group.</h1>
-          <h1 className="font-serif font-black text-gold-500 leading-tight text-5xl md:text-7xl mb-6">Many Ventures.</h1>
+          <h1 className="font-serif font-black text-white leading-tight text-5xl md:text-7xl">{HERO_CONTENT.titleLine1}</h1>
+          <h1 className="font-serif font-black text-gold-500 leading-tight text-5xl md:text-7xl mb-6">{HERO_CONTENT.titleLine2}</h1>
 
           <p className="text-gray-400 text-base md:text-lg leading-relaxed max-w-xl mb-9">
-            PTC Group India is a diversified conglomerate spanning chemicals, logistics, organics, beverages,
-            packaging, technology and creative services - united by one vision.
+            {HERO_CONTENT.description}
           </p>
 
           <div className="flex flex-wrap gap-4 mb-10">
-            <a
-              href="#companies"
+            <Link
+              href={HERO_CONTENT.primaryCta.href}
               className="bg-gold-500 hover:bg-gold-600 text-white text-xs font-bold tracking-widest uppercase px-8 py-4 rounded transition-all duration-200 hover:-translate-y-0.5"
             >
-              Explore Companies
-            </a>
-            <a
-              href="#about"
+              {HERO_CONTENT.primaryCta.label}
+            </Link>
+            <Link
+              href={HERO_CONTENT.secondaryCta.href}
               className="border border-gold-500/40 hover:bg-gold-500/10 text-gold-500 text-xs font-bold tracking-widest uppercase px-8 py-4 rounded transition-all duration-200 hover:-translate-y-0.5"
             >
-              About the Group
-            </a>
+              {HERO_CONTENT.secondaryCta.label}
+            </Link>
           </div>
 
           <div className="grid grid-cols-4 gap-px bg-gold-500/15 rounded-lg overflow-hidden border border-gold-500/15 max-w-lg">
@@ -93,7 +92,7 @@ export default function HeroSection() {
           </div>
 
           <div className="flex flex-wrap gap-2 mt-6">
-            {SERVICE_TAGS.map((tag) => (
+            {HERO_CONTENT.serviceTags.map((tag) => (
               <span
                 key={tag}
                 className="bg-white/5 border border-white/10 text-gray-400 text-[10px] font-semibold tracking-wide px-3 py-1.5 rounded-full"

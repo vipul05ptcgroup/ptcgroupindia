@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { COMPANIES, CATEGORIES } from '@/lib/companies'
+import { COMPANIES_SECTION_CONTENT } from '@/lib/sitedata'
 import CompanyCard from './CompanyCard'
 
 export default function CompaniesSection() {
@@ -14,20 +15,18 @@ export default function CompaniesSection() {
   return (
     <section id="companies" className="bg-slate-100 py-24 px-6 md:px-10">
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
         <div className="text-center mb-14">
           <p className="text-[10px] font-bold tracking-[0.25em] text-gold-500 uppercase mb-3">
-            Our Portfolio
+            {COMPANIES_SECTION_CONTENT.eyebrow}
           </p>
           <h2 className="font-serif font-black text-navy-600 text-4xl md:text-5xl leading-tight">
-            Our Companies &amp; Brands
+            {COMPANIES_SECTION_CONTENT.title}
           </h2>
           <p className="text-gray-500 text-base max-w-lg mx-auto mt-4">
-            A growing family of businesses across diverse industries — each a leader in its domain.
+            {COMPANIES_SECTION_CONTENT.description}
           </p>
         </div>
 
-        {/* Filter tabs */}
         <div className="flex flex-wrap justify-center gap-2 mb-10">
           {CATEGORIES.map((cat) => (
             <button
@@ -44,7 +43,6 @@ export default function CompaniesSection() {
           ))}
         </div>
 
-        {/* Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
           {filtered.map((company) => (
             <CompanyCard key={company.id} company={company} />
