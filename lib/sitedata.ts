@@ -105,6 +105,18 @@ export const FOOTER_CONTENT = {
 }
 
 export const HOME_PAGE_CONTENT = {
+  marquee: [
+    'Specialty Chemicals',
+    'Industrial Solvents',
+    'Baby Care Products',
+    'Organic Ingredients',
+    'Medical Products',
+    'Packaging Solutions',
+    'Smart Wearables',
+    'Skincare and Haircare',
+    'Import and Export',
+    'Pan India Logistics',
+  ],
   industries: {
     eyebrow: 'What We Supply',
     title: 'Solutions for Every Industry',
@@ -141,6 +153,54 @@ export const HOME_PAGE_CONTENT = {
       },
     ],
   },
+  capabilities: {
+    eyebrow: 'What We Do',
+    title: 'Core Capabilities',
+    description:
+      'Integrated service delivery across chemicals, logistics, personal care, medical products, and technology-led consumer brands.',
+    items: [
+      {
+        title: 'Chemical Distribution',
+        desc: 'Supply of solvents, acids, and industrial chemicals through trusted sourcing and delivery workflows.',
+      },
+      {
+        title: 'Freight and Logistics',
+        desc: 'Road, air, and sea transport coordination for domestic and international movement.',
+      },
+      {
+        title: 'Consumer Product Brands',
+        desc: 'Category-focused brands in baby care, personal care, and lifestyle segments.',
+      },
+      {
+        title: 'Organic Ingredient Supply',
+        desc: 'Organic ingredient products for clean-label, wellness, and formulation-led businesses.',
+      },
+      {
+        title: 'Medical Product Range',
+        desc: 'Dependable medical products built around quality and everyday healthcare needs.',
+      },
+      {
+        title: 'Packaging and Containers',
+        desc: 'Bottle, container, and packaging formats for industrial and retail-ready applications.',
+      },
+    ],
+  },
+  sectors: {
+    eyebrow: 'Sectors We Serve',
+    title: 'Industries We Power',
+    items: [
+      'Manufacturing',
+      'Pharmaceuticals',
+      'FMCG and Personal Care',
+      'Medical Supply',
+      'Food and Wellness',
+      'Retail Distribution',
+      'Import and Export',
+      'Ecommerce',
+      'Technology Consumers',
+      'Cleaning and Hygiene',
+    ],
+  },
   trust: {
     eyebrow: 'Why PTC Group',
     title: 'Built for Consistency, Scale, and Long-Term Partnerships',
@@ -151,6 +211,13 @@ export const HOME_PAGE_CONTENT = {
       'Responsive team for enquiries, sampling, and business onboarding.',
     ],
   },
+  journey: [
+    { year: '2009', title: 'Group Origin', desc: 'Started with specialty chemical distribution and trading operations.' },
+    { year: '2013', title: 'Portfolio Expansion', desc: 'Expanded into wider categories and long-term partner network.' },
+    { year: '2017', title: 'Logistics Strength', desc: 'Built transport and dispatch capability for multi-region operations.' },
+    { year: '2021', title: 'New Verticals', desc: 'Scaled personal care, medical, packaging, and consumer product verticals.' },
+    { year: 'Today', title: 'Diversified Group', desc: 'Operating a focused portfolio of brands across sectors.' },
+  ],
   quote: {
     text:
       'Our core belief is to value relationships, earn customers for life, and treat suppliers as long-term partners.',
@@ -163,4 +230,5 @@ export const HOME_PAGE_CONTENT = {
     primary: { label: 'Contact Us', href: '/contact' },
     secondary: { label: 'Explore Companies', href: '/companies' },
   },
+  recognitions: ['Pan India Operations', '10+ Brands', 'Since 2009', 'Multi-Sector Portfolio', 'Import and Export'],
 }

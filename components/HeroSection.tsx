@@ -27,12 +27,12 @@ function StatBox({ value, label }: { value: string; label: string }) {
   const animated = useCountUp(numericPart)
 
   return (
-    <div className="bg-navy-900/70 px-4 py-4 text-center">
-      <div className="text-2xl md:text-3xl font-black text-gold-500 leading-none">
+    <div className="bg-navy-900/70 px-2 sm:px-4 py-3 sm:py-4 text-center">
+      <div className="text-xl sm:text-2xl md:text-3xl font-black text-gold-500 leading-none">
         {animated}
         {suffix}
       </div>
-      <div className="text-[9px] text-gray-500 tracking-[0.2em] uppercase mt-1">{label}</div>
+      <div className="text-[8px] sm:text-[9px] text-gray-500 tracking-[0.14em] sm:tracking-[0.2em] uppercase mt-1">{label}</div>
     </div>
   )
 }
@@ -41,7 +41,7 @@ export default function HeroSection() {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-navy-950 via-navy-900 to-navy-800 pt-20 pb-16 px-6 md:px-10"
+      className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-navy-950 via-navy-900 to-navy-800 pt-24 sm:pt-20 pb-14 sm:pb-16 px-4 sm:px-6 md:px-10"
     >
       <div className="absolute inset-0 bg-hero-grid bg-grid opacity-100 pointer-events-none" />
 
@@ -50,7 +50,7 @@ export default function HeroSection() {
 
       <div className="relative z-10 max-w-7xl mx-auto w-full">
         <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-3 bg-gold-500/10 border border-gold-500/30 rounded-full px-4 py-1.5 mb-7">
+          <div className="inline-flex items-center gap-2 sm:gap-3 bg-gold-500/10 border border-gold-500/30 rounded-full px-3 sm:px-4 py-1.5 mb-6 sm:mb-7">
             <Image
               src="/Images/Favicon.png"
               alt="PTC Group icon"
@@ -58,28 +58,28 @@ export default function HeroSection() {
               height={18}
               className="favicon-spin h-[16px] w-[16px] md:h-[18px] md:w-[18px]"
             />
-            <span className="text-gold-500 text-[10px] font-bold tracking-[0.2em] uppercase">
+            <span className="text-gold-500 text-[9px] sm:text-[10px] font-bold tracking-[0.14em] sm:tracking-[0.2em] uppercase">
               {HERO_CONTENT.badge}
             </span>
           </div>
 
-          <h1 className="font-serif font-black text-white leading-tight text-5xl md:text-7xl">{HERO_CONTENT.titleLine1}</h1>
-          <h1 className="font-serif font-black text-gold-500 leading-tight text-5xl md:text-7xl mb-6">{HERO_CONTENT.titleLine2}</h1>
+          <h1 className="font-serif font-black text-white leading-tight text-4xl sm:text-5xl md:text-7xl">{HERO_CONTENT.titleLine1}</h1>
+          <h1 className="font-serif font-black text-gold-500 leading-tight text-4xl sm:text-5xl md:text-7xl mb-5 sm:mb-6">{HERO_CONTENT.titleLine2}</h1>
 
-          <p className="text-gray-400 text-base md:text-lg leading-relaxed max-w-xl mb-9">
+          <p className="text-gray-400 text-sm sm:text-base md:text-lg leading-relaxed max-w-xl mb-7 sm:mb-9">
             {HERO_CONTENT.description}
           </p>
 
-          <div className="flex flex-wrap gap-4 mb-10">
+          <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-4 mb-8 sm:mb-10">
             <Link
               href={HERO_CONTENT.primaryCta.href}
-              className="bg-gold-500 hover:bg-gold-600 text-white text-xs font-bold tracking-widest uppercase px-8 py-4 rounded transition-all duration-200 hover:-translate-y-0.5"
+              className="text-center bg-gold-500 hover:bg-gold-600 text-white text-xs font-bold tracking-widest uppercase px-6 sm:px-8 py-3.5 sm:py-4 rounded transition-all duration-200 hover:-translate-y-0.5"
             >
               {HERO_CONTENT.primaryCta.label}
             </Link>
             <Link
               href={HERO_CONTENT.secondaryCta.href}
-              className="border border-gold-500/40 hover:bg-gold-500/10 text-gold-500 text-xs font-bold tracking-widest uppercase px-8 py-4 rounded transition-all duration-200 hover:-translate-y-0.5"
+              className="text-center border border-gold-500/40 hover:bg-gold-500/10 text-gold-500 text-xs font-bold tracking-widest uppercase px-6 sm:px-8 py-3.5 sm:py-4 rounded transition-all duration-200 hover:-translate-y-0.5"
             >
               {HERO_CONTENT.secondaryCta.label}
             </Link>
@@ -91,16 +91,6 @@ export default function HeroSection() {
             ))}
           </div>
 
-          <div className="flex flex-wrap gap-2 mt-6">
-            {HERO_CONTENT.serviceTags.map((tag) => (
-              <span
-                key={tag}
-                className="bg-white/5 border border-white/10 text-gray-400 text-[10px] font-semibold tracking-wide px-3 py-1.5 rounded-full"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
         </div>
       </div>
     </section>
