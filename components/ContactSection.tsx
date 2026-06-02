@@ -47,7 +47,7 @@ const HOURS = [
 export default function ContactSection() {
   const [submitted, setSubmitted] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     e.currentTarget.reset()
     setSubmitted(true)
