@@ -1,37 +1,12 @@
-'use client'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
 import { GROUP_STATS } from '@/lib/companies'
 import { HERO_CONTENT } from '@/lib/sitedata'
 
-function useCountUp(target: number, duration = 2000) {
-  const [count, setCount] = useState(0)
-  useEffect(() => {
-    const steps = 60
-    let step = 0
-    const timer = setInterval(() => {
-      step++
-      const ease = 1 - Math.pow(1 - step / steps, 3)
-      setCount(Math.round(target * ease))
-      if (step >= steps) clearInterval(timer)
-    }, duration / steps)
-    return () => clearInterval(timer)
-  }, [target, duration])
-  return count
-}
-
 function StatBox({ value, label }: { value: string; label: string }) {
-  const numericPart = parseInt(value.replace('+', ''))
-  const suffix = value.includes('+') ? '+' : ''
-  const animated = useCountUp(numericPart)
-
   return (
     <div className="bg-navy-900/70 px-2 sm:px-4 py-3 sm:py-4 text-center">
-      <div className="text-xl sm:text-2xl md:text-3xl font-black text-gold-500 leading-none">
-        {animated}
-        {suffix}
-      </div>
+      <div className="text-xl sm:text-2xl md:text-3xl font-black text-gold-500 leading-none">{value}</div>
       <div className="text-[8px] sm:text-[9px] text-gray-500 tracking-[0.14em] sm:tracking-[0.2em] uppercase mt-1">{label}</div>
     </div>
   )

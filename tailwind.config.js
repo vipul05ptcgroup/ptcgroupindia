@@ -35,8 +35,8 @@ module.exports = {
         },
       },
       fontFamily: {
-        sans: ['var(--font-sans)', 'Segoe UI', 'Helvetica Neue', 'sans-serif'],
-        serif: ['Georgia', 'serif'],
+        sans: ['system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'sans-serif'],
+        serif: ['Georgia', 'Cambria', '"Times New Roman"', 'serif'],
       },
       backgroundImage: {
         'hero-grid': "linear-gradient(rgba(200,145,43,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(200,145,43,0.06) 1px, transparent 1px)",

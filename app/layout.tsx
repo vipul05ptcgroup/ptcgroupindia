@@ -1,10 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
-
-const SITE_URL =
-  process.env.SITE_URL ||
-  process.env.NEXT_PUBLIC_SITE_URL ||
-  'https://ptcgroupindia.in'
+import { SITE_URL } from '@/lib/routes'
 
 export const metadata: Metadata = {
   title: 'PTC Group India - Idea. Profit. Future.',

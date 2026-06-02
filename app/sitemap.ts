@@ -1,35 +1,31 @@
 import type { MetadataRoute } from 'next'
 import { COMPANIES } from '@/lib/companies'
-
-const SITE_URL =
-  process.env.SITE_URL ||
-  process.env.NEXT_PUBLIC_SITE_URL ||
-  'https://ptcgroupindia.in'
+import { getCanonicalUrl, getCompanyPath } from '@/lib/routes'
 
 const NOW = new Date()
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [
     {
-      url: `${SITE_URL}/`,
+      url: getCanonicalUrl('/'),
       lastModified: NOW,
       changeFrequency: 'weekly',
       priority: 1,
     },
     {
-      url: `${SITE_URL}/about`,
+      url: getCanonicalUrl('/about'),
       lastModified: NOW,
       changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
-      url: `${SITE_URL}/companies`,
+      url: getCanonicalUrl('/companies'),
       lastModified: NOW,
       changeFrequency: 'weekly',
       priority: 0.9,
     },
     {
-      url: `${SITE_URL}/contact`,
+      url: getCanonicalUrl('/contact'),
       lastModified: NOW,
       changeFrequency: 'monthly',
       priority: 0.7,
@@ -37,7 +33,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ]
 
   const companyPages: MetadataRoute.Sitemap = COMPANIES.map((company) => ({
-    url: `${SITE_URL}/companies/${company.id}`,
+    url: getCanonicalUrl(getCompanyPath(company)),
     lastModified: NOW,
     changeFrequency: 'monthly',
     priority: 0.75,

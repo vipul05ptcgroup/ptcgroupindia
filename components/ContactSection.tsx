@@ -45,21 +45,11 @@ const HOURS = [
 ]
 
 export default function ContactSection() {
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    company: '',
-    enquiry: '',
-    city: '',
-    message: '',
-    consent: false,
-  })
   const [submitted, setSubmitted] = useState(false)
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
+    e.currentTarget.reset()
     setSubmitted(true)
   }
 
@@ -131,15 +121,13 @@ export default function ContactSection() {
                   <input
                     required
                     placeholder="First Name"
-                    value={formData.firstName}
-                    onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                    name="firstName"
                     className="w-full bg-white border border-slate-300 rounded px-4 py-3 text-sm text-navy-700 placeholder:text-gray-400 outline-none focus:border-gold-500/60"
                   />
                   <input
                     required
                     placeholder="Last Name"
-                    value={formData.lastName}
-                    onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                    name="lastName"
                     className="w-full bg-white border border-slate-300 rounded px-4 py-3 text-sm text-navy-700 placeholder:text-gray-400 outline-none focus:border-gold-500/60"
                   />
                 </div>
@@ -148,27 +136,24 @@ export default function ContactSection() {
                     type="email"
                     required
                     placeholder="Email Address"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    name="email"
                     className="w-full bg-white border border-slate-300 rounded px-4 py-3 text-sm text-navy-700 placeholder:text-gray-400 outline-none focus:border-gold-500/60"
                   />
                   <input
                     placeholder="Phone Number"
-                    value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    name="phone"
                     className="w-full bg-white border border-slate-300 rounded px-4 py-3 text-sm text-navy-700 placeholder:text-gray-400 outline-none focus:border-gold-500/60"
                   />
                 </div>
                 <input
                   placeholder="Company / Organisation"
-                  value={formData.company}
-                  onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                  name="company"
                   className="w-full bg-white border border-slate-300 rounded px-4 py-3 text-sm text-navy-700 placeholder:text-gray-400 outline-none focus:border-gold-500/60"
                 />
                 <div className="grid sm:grid-cols-2 gap-4">
                   <select
-                    value={formData.enquiry}
-                    onChange={(e) => setFormData({ ...formData, enquiry: e.target.value })}
+                    name="enquiry"
+                    defaultValue=""
                     className="w-full bg-white border border-slate-300 rounded px-4 py-3 text-sm text-navy-700 outline-none focus:border-gold-500/60"
                   >
                     <option value="">Select enquiry type</option>
@@ -180,23 +165,20 @@ export default function ContactSection() {
                   </select>
                   <input
                     placeholder="Your City"
-                    value={formData.city}
-                    onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+                    name="city"
                     className="w-full bg-white border border-slate-300 rounded px-4 py-3 text-sm text-navy-700 placeholder:text-gray-400 outline-none focus:border-gold-500/60"
                   />
                 </div>
                 <textarea
                   rows={5}
                   placeholder="Tell us about your requirement..."
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  name="message"
                   className="w-full bg-white border border-slate-300 rounded px-4 py-3 text-sm text-navy-700 placeholder:text-gray-400 outline-none focus:border-gold-500/60"
                 />
                 <label className="flex gap-2 text-sm text-gray-600">
                   <input
                     type="checkbox"
-                    checked={formData.consent}
-                    onChange={(e) => setFormData({ ...formData, consent: e.target.checked })}
+                    name="consent"
                     required
                   />
                   <span>I agree to be contacted regarding this enquiry.</span>

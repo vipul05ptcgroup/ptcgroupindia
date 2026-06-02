@@ -1,31 +1,24 @@
-'use client'
-import { useState } from 'react'
 import Link from 'next/link'
 import { Company } from '@/lib/companies'
+import { getCompanyPath } from '@/lib/routes'
 
 interface CompanyCardProps {
   company: Company
 }
 
 export default function CompanyCard({ company }: CompanyCardProps) {
-  const [hovered, setHovered] = useState(false)
-
   return (
     <Link
-      href={`/companies/${company.id}`}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      className={`bg-white rounded-xl overflow-hidden flex flex-col transition-all duration-300 ${
-        hovered ? 'shadow-2xl -translate-y-1.5' : 'shadow-sm'
-      }`}
+      href={getCompanyPath(company)}
+      className="group bg-white rounded-xl overflow-hidden flex flex-col transition-all duration-300 shadow-sm hover:shadow-2xl hover:-translate-y-1.5"
       style={{
-        border: hovered ? `1px solid ${company.color}40` : '1px solid rgba(0,0,0,0.07)',
+        border: `1px solid ${company.color}20`,
       }}
     >
       <div
-        className="transition-all duration-300"
+        className="transition-all duration-300 group-hover:h-[5px]"
         style={{
-          height: hovered ? '5px' : '4px',
+          height: '4px',
           background: company.color,
         }}
       />
@@ -64,7 +57,7 @@ export default function CompanyCard({ company }: CompanyCardProps) {
             <div>Stats {company.stats}</div>
             {company.founded && <div className="text-gray-500 font-semibold mt-0.5">Since {company.founded}</div>}
           </div>
-          <span className="text-navy-600 hover:text-gold-500 text-[12px] sm:text-[11px] font-bold tracking-wide uppercase transition-colors duration-200">
+          <span className="text-navy-600 group-hover:text-gold-500 text-[12px] sm:text-[11px] font-bold tracking-wide uppercase transition-colors duration-200">
             View Details -&gt;
           </span>
         </div>

@@ -1,9 +1,5 @@
 import type { MetadataRoute } from 'next'
-
-const SITE_URL =
-  process.env.SITE_URL ||
-  process.env.NEXT_PUBLIC_SITE_URL ||
-  'https://ptcgroupindia.in'
+import { SITE_URL, getCanonicalUrl } from '@/lib/routes'
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -24,7 +20,7 @@ export default function robots(): MetadataRoute.Robots {
         ],
       },
     ],
-    sitemap: `${SITE_URL}/sitemap.xml`,
+    sitemap: getCanonicalUrl('/sitemap.xml'),
     host: SITE_URL,
   }
 }

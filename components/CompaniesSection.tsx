@@ -1,4 +1,3 @@
-'use client'
 import { COMPANIES } from '@/lib/companies'
 import { COMPANIES_SECTION_CONTENT } from '@/lib/sitedata'
 import CompanyCard from './CompanyCard'

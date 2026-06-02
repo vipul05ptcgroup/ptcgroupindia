@@ -12,8 +12,21 @@ export default function Navbar() {
   const hasSolidBackground = pathname !== '/' || scrolled
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60)
-    window.addEventListener('scroll', onScroll)
+    let ticking = false
+
+    const onScroll = () => {
+      if (ticking) return
+
+      ticking = true
+      window.requestAnimationFrame(() => {
+        const nextScrolled = window.scrollY > 60
+        setScrolled((current) => (current === nextScrolled ? current : nextScrolled))
+        ticking = false
+      })
+    }
+
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
@@ -27,7 +40,7 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between h-16 md:h-18">
         <Link href="/">
-          <Logo size="sm" />
+          <Logo size="sm" priority />
         </Link>
 
         {/* Desktop links */}

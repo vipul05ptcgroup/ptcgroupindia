@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import { COMPANIES } from '@/lib/companies'
+import { getCanonicalUrl, getCompanyPath, resolveCompanySlug, SITE_URL } from '@/lib/routes'
 
 interface CompanyDetailPageProps {
   params: {
@@ -11,30 +12,18 @@ interface CompanyDetailPageProps {
   }
 }
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || 'https://ptcgroupindia.in'
 const OG_IMAGE = `${SITE_URL}/Images/Logo.png`
 
 function getCompanyById(id: string) {
   return COMPANIES.find((item) => item.id === id)
 }
 
-const LEGACY_ID_REDIRECTS: Record<string, string> = {
-  ptclogistics: 'ptc-logistics',
-  thefuturex: 'the-futurex',
-  devangorganics: 'devang-organics',
-  'himalayan-brewery': 'the-himalayan-brewery',
-  'himalayan-store': 'the-himalayan-store',
-  zauracare: 'zaura-care',
-  sspackaging: 'ss-packaging',
-}
-
 export function generateStaticParams() {
-  return COMPANIES.map((company) => ({ id: company.id }))
+  return COMPANIES.map((company) => ({ id: resolveCompanySlug(company.id) }))
 }
 
 export function generateMetadata({ params }: CompanyDetailPageProps): Metadata {
-  const normalizedId = params.id.toLowerCase()
-  const resolvedId = LEGACY_ID_REDIRECTS[normalizedId] || normalizedId
+  const resolvedId = resolveCompanySlug(params.id)
   const company = getCompanyById(resolvedId)
 
   if (!company) {
@@ -45,7 +34,7 @@ export function generateMetadata({ params }: CompanyDetailPageProps): Metadata {
     }
   }
 
-  const canonicalUrl = `${SITE_URL}/companies/${company.id}`
+  const canonicalUrl = getCanonicalUrl(getCompanyPath(company))
   const title = `${company.name} | ${company.tagline} | PTC Group India`
   const description = company.longDesc || company.desc
 
@@ -85,18 +74,14 @@ export function generateMetadata({ params }: CompanyDetailPageProps): Metadata {
 }
 
 export default function CompanyDetailPage({ params }: CompanyDetailPageProps) {
-  const normalizedId = params.id.toLowerCase()
-  const legacyRedirectId = LEGACY_ID_REDIRECTS[normalizedId]
+  const resolvedId = resolveCompanySlug(params.id)
+  const canonicalPath = getCompanyPath({ id: resolvedId })
 
-  if (legacyRedirectId) {
-    permanentRedirect(`/companies/${legacyRedirectId}`)
+  if (params.id !== resolvedId) {
+    permanentRedirect(canonicalPath)
   }
 
-  if (params.id !== normalizedId) {
-    permanentRedirect(`/companies/${normalizedId}`)
-  }
-
-  const company = getCompanyById(normalizedId)
+  const company = getCompanyById(resolvedId)
 
   if (!company) notFound()
 
@@ -106,7 +91,7 @@ export default function CompanyDetailPage({ params }: CompanyDetailPageProps) {
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
       { '@type': 'ListItem', position: 2, name: 'Companies', item: `${SITE_URL}/companies` },
-      { '@type': 'ListItem', position: 3, name: company.name, item: `${SITE_URL}/companies/${company.id}` },
+      { '@type': 'ListItem', position: 3, name: company.name, item: getCanonicalUrl(getCompanyPath(company)) },
     ],
   }
 
@@ -120,7 +105,7 @@ export default function CompanyDetailPage({ params }: CompanyDetailPageProps) {
       '@type': 'Brand',
       name: company.name,
     },
-    url: `${SITE_URL}/companies/${company.id}`,
+    url: getCanonicalUrl(getCompanyPath(company)),
     image: OG_IMAGE,
     additionalProperty: [
       { '@type': 'PropertyValue', name: 'Tagline', value: company.tagline },

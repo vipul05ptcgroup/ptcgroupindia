@@ -6,6 +6,13 @@
   html {
     scroll-behavior: smooth;
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
   body {
     @apply bg-navy-900 text-white;
   }
@@ -43,5 +50,12 @@
   }
   100% {
     transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .favicon-spin,
+  .animate-\[marquee_28s_linear_infinite\] {
+    animation: none !important;
   }
 }
