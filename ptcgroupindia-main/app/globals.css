@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    @apply bg-navy-900 text-white;
+  }
+}
+
+@layer utilities {
+  .bg-hero-grid {
+    background-image: linear-gradient(rgba(200,145,43,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(200,145,43,0.06) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .favicon-spin {
+    animation: favicon-spin 3s linear infinite;
+    transform-origin: center;
+  }
+}
+
+@keyframes favicon-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .favicon-spin,
+  .animate-\[marquee_28s_linear_infinite\] {
+    animation: none !important;
+  }
+}
