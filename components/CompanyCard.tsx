@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { Company } from '@/lib/companies'
 import { getCompanyPath } from '@/lib/routes'
 
@@ -32,7 +33,19 @@ export default function CompanyCard({ company }: CompanyCardProps) {
               border: `1px solid ${company.color}25`,
             }}
           >
-            {company.icon}
+            {company.iconImage ? (
+              <Image
+                src={company.iconImage}
+                alt={`${company.name} logo`}
+                width={96}
+                height={96}
+                sizes="44px"
+                quality={100}
+                className="h-9 w-9 sm:h-11 sm:w-11 object-contain"
+              />
+            ) : (
+              company.icon
+            )}
           </div>
           <span
             className="text-[8px] sm:text-[9px] font-bold tracking-[0.12em] sm:tracking-widest uppercase px-2 sm:px-2.5 py-1 rounded-full"

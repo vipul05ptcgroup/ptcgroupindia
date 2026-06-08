@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { ABOUT_CONTENT, HOME_PAGE_CONTENT } from '@/lib/sitedata'
 import { COMPANIES } from '@/lib/companies'
 
@@ -23,14 +24,26 @@ export default function HomeSections() {
       <section className="bg-slate-50 px-4 sm:px-6 md:px-10 py-16 sm:py-24">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-10 sm:gap-16 items-center">
           <div className="relative">
-            <div className="rounded-xl bg-gradient-to-br from-navy-900 via-navy-800 to-navy-700 p-5 sm:p-8">
-              <div className="grid grid-cols-4 gap-3">
-                {COMPANIES.slice(0, 8).map((c) => (
+            <div className="rounded-xl bg-slate-200 border border-slate-300 p-5 sm:p-8 shadow-inner">
+              <div className="grid grid-cols-5 gap-2 sm:gap-3">
+                {COMPANIES.slice(0, 10).map((c) => (
                   <div
                     key={c.id}
-                    className="aspect-square rounded-md bg-white/10 border border-white/15 flex items-center justify-center text-gold-400 font-bold text-sm sm:text-base"
+                    className="aspect-square rounded-lg bg-slate-400 border border-slate-500/60 flex items-center justify-center p-1.5 sm:p-2 text-navy-700 font-bold text-sm sm:text-base shadow-sm"
                   >
-                    {c.icon}
+                    {c.iconImage ? (
+                      <Image
+                        src={c.iconImage}
+                        alt={`${c.name} logo`}
+                        width={180}
+                        height={180}
+                        sizes="(max-width: 640px) 14vw, (max-width: 1024px) 72px, 88px"
+                        quality={100}
+                        className="h-full w-full object-contain"
+                      />
+                    ) : (
+                      c.icon
+                    )}
                   </div>
                 ))}
               </div>

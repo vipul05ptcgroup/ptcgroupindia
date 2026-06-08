@@ -8,6 +8,7 @@ export interface Company {
   stats: string
   color: string
   icon: string
+  iconImage?: string
   internal?: boolean
   founded?: string
   headquarters?: string
@@ -41,6 +42,7 @@ export const COMPANIES: Company[] = [
     stats: '500+ Products',
     color: '#C8912B',
     icon: 'CH',
+    iconImage: '/Images/CH-Favicon.png',
     founded: '2006',
     headquarters: COMMON_COMPANY_ADDRESS,
     contactInfo: COMMON_COMPANY_ADDRESS,
@@ -94,6 +96,7 @@ export const COMPANIES: Company[] = [
     stats: '400+ Clients',
     color: '#2B6CB0',
     icon: 'LG',
+    iconImage: '/Images/LG-Logo.png',
     headquarters: COMMON_COMPANY_ADDRESS,
     contactInfo: COMMON_COMPANY_ADDRESS,
     parentGroup: 'PTC Group',
@@ -142,6 +145,7 @@ export const COMPANIES: Company[] = [
     stats: 'Since 2018',
     color: '#00A3C4',
     icon: 'IL',
+    iconImage: '/Images/Favicon.webp',
     founded: '2018',
     headquarters: COMMON_COMPANY_ADDRESS,
     contactInfo: COMMON_COMPANY_ADDRESS,
@@ -193,6 +197,7 @@ export const COMPANIES: Company[] = [
     stats: 'Smart Wearables',
     color: '#553C9A',
     icon: 'TX',
+    iconImage: '/Images/TX-Favicon.png',
     headquarters: COMMON_COMPANY_ADDRESS,
     contactInfo: COMMON_COMPANY_ADDRESS,
     highlights: [
@@ -237,6 +242,7 @@ export const COMPANIES: Company[] = [
     stats: 'Everyday Care',
     color: '#38A169',
     icon: 'BC',
+    iconImage: '/Images/BC-Favicon.png',
     headquarters: COMMON_COMPANY_ADDRESS,
     contactInfo: COMMON_COMPANY_ADDRESS,
     parentGroup: 'PTC Group',
@@ -278,6 +284,7 @@ export const COMPANIES: Company[] = [
     stats: 'Ingredient Focus',
     color: '#68A35A',
     icon: 'OR',
+    iconImage: '/Images/OR-Favicon.png',
     headquarters: COMMON_COMPANY_ADDRESS,
     contactInfo: COMMON_COMPANY_ADDRESS,
     parentGroup: 'PTC Group',
@@ -321,6 +328,7 @@ export const COMPANIES: Company[] = [
     stats: 'Artisan Craft',
     color: '#744210',
     icon: 'BV',
+    iconImage: '/Images/BV-Favicon.webp',
     headquarters: COMMON_COMPANY_ADDRESS,
     contactInfo: COMMON_COMPANY_ADDRESS,
     parentGroup: 'PTC Group',
@@ -361,6 +369,7 @@ export const COMPANIES: Company[] = [
     stats: 'Curated Collection',
     color: '#B7791F',
     icon: 'RT',
+    iconImage: '/Images/RT-Logo.png',
     headquarters: COMMON_COMPANY_ADDRESS,
     contactInfo: COMMON_COMPANY_ADDRESS,
     parentGroup: 'PTC Group',
@@ -403,6 +412,7 @@ export const COMPANIES: Company[] = [
     stats: 'Healthcare First',
     color: '#D53F8C',
     icon: 'MD',
+    iconImage: '/Images/MD-Favicon.png',
     headquarters: COMMON_COMPANY_ADDRESS,
     contactInfo: COMMON_COMPANY_ADDRESS,
     parentGroup: 'PTC Group',
@@ -446,6 +456,7 @@ export const COMPANIES: Company[] = [
     stats: 'Packaging Solutions',
     color: '#4A5568',
     icon: 'PK',
+    iconImage: '/Images/PK-Favicon.png',
     headquarters: COMMON_COMPANY_ADDRESS,
     contactInfo: COMMON_COMPANY_ADDRESS,
     parentGroup: 'PTC Group',
