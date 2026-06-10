@@ -9,10 +9,11 @@ export const HERO_CONTENT = {
   badge: 'Trusted Since 2009',
   titleLine1: 'One Group.',
   titleLine2: 'Many Ventures.',
+  tagline: 'From Everyday Essentials to Extraordinary Possibilities.',
   description:
-    'PTC Group India is a diversified conglomerate spanning chemicals, logistics, organics, beverages, packaging, technology and creative services - united by one vision.',
+    'PTC Group India is a diversified business group with interests across chemicals, logistics, organics, beverages, packaging, technology, healthcare, personal care, and creative services, creating value through innovation and entrepreneurship across every sector it serves.',
   primaryCta: { label: 'Explore Companies', href: '/companies' },
-  secondaryCta: { label: 'About the Group', href: '/about' },
+  secondaryCta: { label: 'Contact Us', href: '/contact' },
   serviceTags: ['Chemicals', 'Logistics', 'Organics', 'Beverages', 'Packaging', 'Technology', 'Innovation', 'Creative'],
 }
 
@@ -84,8 +85,9 @@ export const COMPANIES_SECTION_CONTENT = {
 
 export const FOOTER_CONTENT = {
   tagline: 'Idea . Profit . Future',
+  vision: 'From Everyday Essentials to Extraordinary Possibilities.',
   about:
-    'Leading distributors and manufacturers of specialty chemicals, solvents, acids and household cleaning concentrates since 2009.',
+    'PTC Group India is a diversified business group creating value through innovation and entrepreneurship across every sector it serves.',
   cta: { label: 'Global Import & Export', href: '/companies' },
   companyLinks: [
     { label: 'Home', href: '/' },

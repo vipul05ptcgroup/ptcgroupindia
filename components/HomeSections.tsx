@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ABOUT_CONTENT, HOME_PAGE_CONTENT } from '@/lib/sitedata'
 import { COMPANIES } from '@/lib/companies'
+import { getCompanyPath } from '@/lib/routes'
 
 export default function HomeSections() {
   const portfolio = COMPANIES
@@ -24,12 +25,14 @@ export default function HomeSections() {
       <section className="bg-slate-50 px-4 sm:px-6 md:px-10 py-16 sm:py-24">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-10 sm:gap-16 items-center">
           <div className="relative">
-            <div className="rounded-xl bg-slate-200 border border-slate-300 p-5 sm:p-8 shadow-inner">
-              <div className="grid grid-cols-5 gap-2 sm:gap-3">
+            <div className="rounded-xl bg-[#66716e] border border-slate-500 p-3 min-[380px]:p-4 sm:p-8 shadow-inner">
+              <div className="grid grid-cols-5 gap-1.5 min-[380px]:gap-2 sm:gap-3">
                 {COMPANIES.slice(0, 10).map((c) => (
-                  <div
+                  <Link
                     key={c.id}
-                    className="aspect-square rounded-lg bg-slate-400 border border-slate-500/60 flex items-center justify-center p-1.5 sm:p-2 text-navy-700 font-bold text-sm sm:text-base shadow-sm"
+                    href={getCompanyPath(c)}
+                    aria-label={`View ${c.name} details`}
+                    className="group/logo aspect-square min-h-11 rounded-lg bg-[#929c99] border border-white/20 flex items-center justify-center p-1 sm:p-2 text-navy-900 font-bold text-xs sm:text-base shadow-sm transition-all duration-200 hover:bg-[#a5aeab] hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-400"
                   >
                     {c.iconImage ? (
                       <Image
@@ -39,16 +42,16 @@ export default function HomeSections() {
                         height={180}
                         sizes="(max-width: 640px) 14vw, (max-width: 1024px) 72px, 88px"
                         quality={100}
-                        className="h-full w-full object-contain"
+                        className="h-full w-full object-contain drop-shadow-[0_1px_1px_rgba(0,0,0,0.35)] transition-transform duration-200 group-hover/logo:scale-105"
                       />
                     ) : (
                       c.icon
                     )}
-                  </div>
+                  </Link>
                 ))}
               </div>
             </div>
-            <div className="absolute -bottom-3 sm:-bottom-5 -right-3 sm:-right-5 w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gold-500 text-white flex flex-col items-center justify-center shadow-xl">
+            <div className="relative ml-auto mt-4 w-20 h-20 sm:absolute sm:-bottom-5 sm:-right-5 sm:mt-0 sm:w-24 sm:h-24 rounded-full bg-gold-500 text-white flex flex-col items-center justify-center shadow-xl">
               <p className="text-xl sm:text-2xl font-black leading-none">2009</p>
               <p className="text-[9px] tracking-wider uppercase">Founded</p>
             </div>
@@ -80,7 +83,7 @@ export default function HomeSections() {
 
       <section className="bg-white px-4 sm:px-6 md:px-10 py-16 sm:py-24">
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-wrap justify-between items-end gap-6 mb-12">
+          <div className="flex flex-col sm:flex-row sm:flex-wrap sm:justify-between sm:items-end gap-4 sm:gap-6 mb-8 sm:mb-12">
             <div>
               <p className="text-[10px] font-bold tracking-[0.25em] uppercase text-gold-500 mb-3">Our Companies</p>
               <h2 className="font-serif font-black text-navy-700 text-3xl sm:text-4xl md:text-5xl">Group Portfolio</h2>
@@ -99,7 +102,7 @@ export default function HomeSections() {
               >
                 <p className="text-[11px] font-bold tracking-[0.18em] text-gray-400 mb-4">{String(i + 1).padStart(2, '0')}</p>
                 <p className="text-gold-600 text-xs font-bold tracking-wider uppercase mb-2">{c.category}</p>
-                <h3 className="text-xl sm:text-2xl font-extrabold text-navy-700 mb-3">{c.name}</h3>
+                <h3 className="text-xl sm:text-2xl font-extrabold text-navy-700 mb-3 break-words">{c.name}</h3>
                 <p className="text-sm text-gray-600 leading-relaxed">{c.desc}</p>
               </a>
             ))}
@@ -109,7 +112,7 @@ export default function HomeSections() {
 
       <section className="bg-navy-900 px-4 sm:px-6 md:px-10 py-16 sm:py-24">
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-wrap justify-between items-end gap-6 mb-12">
+          <div className="flex flex-col sm:flex-row sm:flex-wrap sm:justify-between sm:items-end gap-4 sm:gap-6 mb-8 sm:mb-12">
             <div>
               <p className="text-[10px] font-bold tracking-[0.25em] uppercase text-gold-400 mb-3">
                 {HOME_PAGE_CONTENT.capabilities.eyebrow}
@@ -138,7 +141,7 @@ export default function HomeSections() {
             {HOME_PAGE_CONTENT.sectors.eyebrow}
           </p>
           <h2 className="font-serif font-black text-navy-700 text-3xl sm:text-4xl md:text-5xl mb-8 sm:mb-10">{HOME_PAGE_CONTENT.sectors.title}</h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+          <div className="grid grid-cols-1 min-[360px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
             {HOME_PAGE_CONTENT.sectors.items.map((sector) => (
               <div
                 key={sector}
@@ -159,7 +162,7 @@ export default function HomeSections() {
             <div className="space-y-6">
               {HOME_PAGE_CONTENT.trust.points.map((p) => (
                 <div key={p} className="flex gap-4">
-                  <div className="w-11 h-11 rounded-md border border-gold-500/30 bg-gold-500/10 text-gold-600 flex items-center justify-center font-bold">
+                  <div className="w-11 h-11 shrink-0 rounded-md border border-gold-500/30 bg-gold-500/10 text-gold-600 flex items-center justify-center font-bold">
                     +
                   </div>
                   <p className="text-gray-700 leading-relaxed">{p}</p>
@@ -176,7 +179,7 @@ export default function HomeSections() {
                   <div className="w-9 h-9 rounded-full border-2 border-gold-500 text-gold-400 text-xs font-bold flex items-center justify-center flex-shrink-0">
                     {step.year === 'Today' ? 'Now' : step.year.slice(-2)}
                   </div>
-                  <div>
+                  <div className="min-w-0">
                     <h3 className="text-white font-bold">{step.title}</h3>
                     <p className="text-sm text-gray-300 mt-1">{step.desc}</p>
                   </div>
@@ -201,7 +204,7 @@ export default function HomeSections() {
 
       <section className="bg-slate-100 px-4 sm:px-6 md:px-10 py-8 sm:py-10">
         <div className="max-w-7xl mx-auto flex flex-wrap items-center gap-3">
-          <p className="text-xs tracking-[0.18em] uppercase text-gray-500 mr-2">Recognized For</p>
+          <p className="w-full sm:w-auto text-xs tracking-[0.18em] uppercase text-gray-500 sm:mr-2">Recognized For</p>
           {HOME_PAGE_CONTENT.recognitions.map((item) => (
             <span key={item} className="bg-white border border-slate-200 rounded px-4 py-2 text-xs font-semibold text-navy-700">
               {item}

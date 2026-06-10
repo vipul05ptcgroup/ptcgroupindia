@@ -5,8 +5,16 @@ import type { Metadata } from 'next'
 import { getCanonicalUrl, SITE_URL } from '@/lib/routes'
 
 export const metadata: Metadata = {
+  title: 'Our Companies',
+  description:
+    'Explore PTC Group India companies and brands across chemicals, logistics, organics, packaging, healthcare, beverages, technology and creative services.',
   alternates: {
     canonical: getCanonicalUrl('/companies'),
+  },
+  openGraph: {
+    title: 'PTC Group India Companies and Brands',
+    description: 'Explore the diversified companies and brands within PTC Group India.',
+    url: getCanonicalUrl('/companies'),
   },
 }
 

@@ -9,6 +9,8 @@ export interface Company {
   color: string
   icon: string
   iconImage?: string
+  cardSubtitle?: string
+  cardMeta?: string
   internal?: boolean
   founded?: string
   headquarters?: string
@@ -40,6 +42,8 @@ export const COMPANIES: Company[] = [
     url: 'https://ptcgram.com',
     category: 'Chemicals',
     stats: '500+ Products',
+    cardSubtitle: 'Specialty Chemicals & Industrial Solutions',
+    cardMeta: '500+ Products • Since 2009',
     color: '#C8912B',
     icon: 'CH',
     iconImage: '/Images/CH-Favicon.png',
@@ -94,6 +98,8 @@ export const COMPANIES: Company[] = [
     url: 'https://ptclogistics.in',
     category: 'Logistics',
     stats: '400+ Clients',
+    cardSubtitle: 'Transport, Mobility & Supply Chain Solutions',
+    cardMeta: '400+ Clients Served',
     color: '#2B6CB0',
     icon: 'LG',
     iconImage: '/Images/LG-Logo.png',
@@ -143,6 +149,8 @@ export const COMPANIES: Company[] = [
     url: 'https://ilika.in',
     category: 'Personal Care',
     stats: 'Since 2018',
+    cardSubtitle: 'Skincare, Haircare & Beauty Devices',
+    cardMeta: 'Trusted by thousands of customers',
     color: '#00A3C4',
     icon: 'IL',
     iconImage: '/Images/Favicon.webp',
@@ -195,6 +203,8 @@ export const COMPANIES: Company[] = [
     url: 'https://thefuturex.in/',
     category: 'Technology',
     stats: 'Smart Wearables',
+    cardSubtitle: 'Smart Wearables & Consumer Technology',
+    cardMeta: 'Smart Rings • Smart Bands • Smart Watches',
     color: '#553C9A',
     icon: 'TX',
     iconImage: '/Images/TX-Favicon.png',
@@ -454,6 +464,8 @@ export const COMPANIES: Company[] = [
     url: 'https://www.sspackaging.co.in/',
     category: 'Packaging',
     stats: 'Packaging Solutions',
+    cardSubtitle: 'Bottles, Containers & Packaging Solutions',
+    cardMeta: 'Cosmetic • Pharma • FMCG Packaging',
     color: '#4A5568',
     icon: 'PK',
     iconImage: '/Images/PK-Favicon.png',

@@ -63,7 +63,7 @@ export default function ContactSection() {
             Reach Out
           </p>
           <div className="grid lg:grid-cols-2 gap-5 sm:gap-10 items-end">
-            <h1 className="font-serif font-black text-white text-4xl sm:text-5xl md:text-7xl leading-tight">
+            <h1 className="font-serif font-black text-white text-[clamp(2.25rem,12vw,3rem)] sm:text-5xl md:text-7xl leading-[1.08]">
               Let&apos;s <span className="text-gold-500">Connect</span> With You
             </h1>
             <p className="text-sm sm:text-base text-gray-300 border-l-2 border-gold-500 pl-4 sm:pl-5 leading-relaxed">
@@ -81,15 +81,15 @@ export default function ContactSection() {
               href={item.href}
               target={item.href.startsWith('http') ? '_blank' : undefined}
               rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-              className="border-b sm:border-r-0 xl:border-b-0 xl:border-r border-white/30 last:border-r-0 p-4 sm:p-6 hover:bg-gold-600 transition-colors"
+              className="min-w-0 border-b sm:border-r-0 xl:border-b-0 xl:border-r border-white/30 last:border-r-0 p-4 sm:p-6 hover:bg-gold-600 transition-colors"
             >
-              <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded bg-white/20 text-white text-xs font-bold flex items-center justify-center">
+              <div className="flex min-w-0 items-center gap-3 sm:gap-4">
+                <div className="w-10 h-10 shrink-0 rounded bg-white/20 text-white text-xs font-bold flex items-center justify-center">
                   {item.icon}
                 </div>
-                <div>
+                <div className="min-w-0">
                   <p className="text-[10px] uppercase tracking-[0.15em] text-white/80 font-semibold">{item.label}</p>
-                  <p className="text-white font-bold text-sm leading-tight sm:text-base">{item.value}</p>
+                  <p className="text-white font-bold text-sm leading-tight sm:text-base break-words [overflow-wrap:anywhere]">{item.value}</p>
                 </div>
               </div>
             </a>
@@ -103,7 +103,7 @@ export default function ContactSection() {
             <p className="text-[10px] font-bold tracking-[0.18em] sm:tracking-[0.25em] uppercase text-gold-500 mb-3">
               Enquire Now
             </p>
-            <h2 className="font-serif font-black text-navy-700 text-3xl sm:text-4xl md:text-5xl leading-tight mb-3">
+            <h2 className="font-serif font-black text-navy-700 text-[1.75rem] sm:text-4xl md:text-5xl leading-tight mb-3">
               Send Us a <span className="text-gold-500">Message</span>
             </h2>
             <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-6 sm:mb-8">
@@ -175,11 +175,12 @@ export default function ContactSection() {
                   name="message"
                   className="w-full bg-white border border-slate-300 rounded px-4 py-3 text-sm text-navy-700 placeholder:text-gray-400 outline-none focus:border-gold-500/60"
                 />
-                <label className="flex gap-2 text-sm text-gray-600">
+                <label className="flex items-start gap-3 text-sm text-gray-600">
                   <input
                     type="checkbox"
                     name="consent"
                     required
+                    className="mt-0.5 h-4 w-4 shrink-0"
                   />
                   <span>I agree to be contacted regarding this enquiry.</span>
                 </label>
@@ -199,7 +200,7 @@ export default function ContactSection() {
                 <h3 className="text-white font-bold text-lg">Registered Office</h3>
                 <p className="text-xs uppercase tracking-wider text-gray-300 mt-1">PTC Group India</p>
               </div>
-              <div className="p-5 space-y-3 text-sm text-gray-700">
+              <div className="p-5 space-y-3 text-sm text-gray-700 [overflow-wrap:anywhere]">
                 <p>302, Padmi Bai Tower, Opposite Virar Railway Subway, Virar East, Palghar.</p>
                 <p>Phone: +91 97108 79879</p>
                 <p>Email: sales.ptcvirar@gmail.com</p>
@@ -212,7 +213,7 @@ export default function ContactSection() {
                 <h3 className="text-white font-bold text-lg">Key Contact</h3>
                 <p className="text-xs uppercase tracking-wider text-gray-300 mt-1">Sales & Customer Relations</p>
               </div>
-              <div className="p-5 text-sm text-gray-700 space-y-2">
+              <div className="p-5 text-sm text-gray-700 space-y-2 [overflow-wrap:anywhere]">
                 <p className="font-bold text-navy-700">Rohit Shetty</p>
                 <p>Sales Manager</p>
                 <p>Direct Line: +91 97108 79879</p>
@@ -229,7 +230,7 @@ export default function ContactSection() {
           <p className="text-[10px] font-bold tracking-[0.18em] sm:tracking-[0.25em] uppercase text-gold-500 mb-3">
             Our Companies
           </p>
-          <h2 className="font-serif font-black text-navy-700 text-3xl sm:text-4xl md:text-5xl mb-8 sm:mb-10">
+          <h2 className="font-serif font-black text-navy-700 text-[1.75rem] sm:text-4xl md:text-5xl leading-tight mb-8 sm:mb-10">
             Contact Our Subsidiaries
           </h2>
           <div className="grid md:grid-cols-2 gap-[2px] bg-slate-200 border border-slate-200">
@@ -242,8 +243,8 @@ export default function ContactSection() {
                 className="bg-white p-6 sm:p-8 hover:bg-slate-50 transition-colors"
               >
                 <p className="text-xs uppercase tracking-[0.15em] text-gold-600 font-bold">{company.category}</p>
-                <h3 className="text-xl sm:text-2xl font-extrabold text-navy-700 mt-2">{company.name}</h3>
-                <p className="text-sm text-gray-600 mt-3">{company.contactInfo || company.headquarters || 'India'}</p>
+                <h3 className="text-xl sm:text-2xl font-extrabold text-navy-700 mt-2 break-words">{company.name}</h3>
+                <p className="text-sm text-gray-600 mt-3 [overflow-wrap:anywhere]">{company.contactInfo || company.headquarters || 'India'}</p>
                 <p className="mt-5 text-xs font-bold uppercase tracking-widest text-gold-600">Visit Website -&gt;</p>
               </a>
             ))}
@@ -275,9 +276,9 @@ export default function ContactSection() {
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center gap-3 sm:gap-6">
           <p className="text-xs uppercase tracking-[0.2em] text-gray-600">Business Hours</p>
           {HOURS.map((item) => (
-            <div key={item} className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-gold-500" />
-              <span className="text-xs sm:text-sm text-gray-700">{item}</span>
+            <div key={item} className="flex min-w-0 items-start gap-2">
+              <span className="mt-1.5 w-2 h-2 shrink-0 rounded-full bg-gold-500" />
+              <span className="min-w-0 text-xs sm:text-sm text-gray-700 break-words">{item}</span>
             </div>
           ))}
         </div>

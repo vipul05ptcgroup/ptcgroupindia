@@ -1,6 +1,7 @@
 ﻿import { notFound, permanentRedirect } from 'next/navigation'
 import type { Metadata } from 'next'
 import Image from 'next/image'
+import Link from 'next/link'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import { COMPANIES } from '@/lib/companies'
@@ -12,7 +13,7 @@ interface CompanyDetailPageProps {
   }
 }
 
-const OG_IMAGE = `${SITE_URL}/Images/Logo.png`
+const OG_IMAGE = `${SITE_URL}/Images/ptc-header-footer-logo.png`
 
 function getCompanyById(id: string) {
   return COMPANIES.find((item) => item.id === id)
@@ -58,8 +59,8 @@ export function generateMetadata({ params }: CompanyDetailPageProps): Metadata {
       images: [
         {
           url: OG_IMAGE,
-          width: 1200,
-          height: 630,
+          width: 1485,
+          height: 1508,
           alt: `${company.name} - ${company.tagline}`,
         },
       ],
@@ -95,168 +96,191 @@ export default function CompanyDetailPage({ params }: CompanyDetailPageProps) {
     ],
   }
 
-  const productSchema = {
+  const companySchema = {
     '@context': 'https://schema.org',
-    '@type': 'Product',
+    '@type': 'Organization',
     name: company.name,
     description: company.longDesc || company.desc,
-    category: company.category,
-    brand: {
-      '@type': 'Brand',
-      name: company.name,
-    },
-    url: getCanonicalUrl(getCompanyPath(company)),
-    image: OG_IMAGE,
-    additionalProperty: [
-      { '@type': 'PropertyValue', name: 'Tagline', value: company.tagline },
-      { '@type': 'PropertyValue', name: 'Stats', value: company.stats },
-      ...(company.founded ? [{ '@type': 'PropertyValue', name: 'Founded', value: company.founded }] : []),
-      ...(company.headquarters ? [{ '@type': 'PropertyValue', name: 'Headquarters', value: company.headquarters }] : []),
-    ],
+    url: company.url,
+    logo: company.iconImage ? `${SITE_URL}${company.iconImage}` : OG_IMAGE,
+    parentOrganization: company.parentGroup
+      ? { '@type': 'Organization', name: company.parentGroup, url: SITE_URL }
+      : undefined,
+    address: company.headquarters,
   }
 
   return (
     <main>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(companySchema) }} />
       <Navbar />
 
-      <section className="bg-navy-950 pt-24 sm:pt-32 pb-12 sm:pb-20 px-4 sm:px-6 md:px-10">
-        <div className="max-w-6xl mx-auto">
-          <div className="mb-5">
-            <Image
-              src="/Images/Logo.png"
-              alt={`${company.name} official brand logo`}
-              width={220}
-              height={58}
-              priority
-              sizes="220px"
-              quality={85}
-            />
+      <section className="company-detail-hero relative overflow-hidden bg-[#202a28] pt-24 sm:pt-32 pb-16 sm:pb-24 px-4 sm:px-6 md:px-10">
+        <div className="companies-grid absolute inset-0 opacity-35 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-900/25 via-slate-700/10 to-black/20 pointer-events-none" />
+        <div
+          className="absolute -top-20 -right-16 h-[75vw] w-[75vw] max-h-80 max-w-80 rounded-full blur-3xl opacity-25 pointer-events-none"
+          style={{ background: company.color }}
+        />
+        <div className="absolute -bottom-32 left-0 h-[85vw] w-[85vw] max-h-96 max-w-96 rounded-full bg-gold-500/10 blur-3xl pointer-events-none" />
+
+        <div className="relative z-10 max-w-6xl mx-auto grid lg:grid-cols-[1fr_320px] gap-10 lg:gap-16 items-center">
+          <div>
+            <Link href="/companies" className="inline-flex min-h-11 items-center gap-2 text-xs font-bold uppercase tracking-[0.12em] sm:tracking-[0.16em] text-slate-200 hover:text-gold-300 transition-colors mb-5 sm:mb-8">
+              <span aria-hidden="true">&lt;-</span> All Companies
+            </Link>
+            <p className="text-[9px] sm:text-[10px] tracking-[0.12em] sm:tracking-[0.2em] uppercase text-gold-400 font-bold mb-3 break-words">
+              {company.category} • PTC Group India
+            </p>
+            <h1 className="font-serif font-black text-white text-3xl min-[380px]:text-4xl sm:text-5xl md:text-7xl leading-[1.05] break-words">
+              {company.name}
+            </h1>
+            <p className="mt-4 text-base min-[380px]:text-lg sm:text-xl md:text-2xl font-semibold text-slate-100 break-words">
+              {company.cardSubtitle || company.tagline}
+            </p>
+            <p className="mt-6 max-w-3xl text-slate-200 text-sm sm:text-base md:text-lg leading-relaxed">
+              {company.longDesc || company.desc}
+            </p>
+
+            <div className="mt-8 flex flex-col sm:flex-row gap-3">
+              <a
+                href={company.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex min-h-12 w-full sm:w-auto items-center justify-center gap-2 rounded-lg bg-gold-500 px-4 sm:px-6 text-center text-[11px] sm:text-xs font-black uppercase tracking-widest text-white hover:bg-gold-400 transition-colors"
+              >
+                Visit Official Website <span aria-hidden="true">-&gt;</span>
+              </a>
+              <a
+                href="#company-overview"
+                className="inline-flex min-h-12 w-full sm:w-auto items-center justify-center rounded-lg border border-white/20 bg-white/5 px-4 sm:px-6 text-center text-[11px] sm:text-xs font-bold uppercase tracking-widest text-white hover:bg-white/10 transition-colors"
+              >
+                Explore Company
+              </a>
+            </div>
           </div>
-          <p className="text-[10px] tracking-[0.16em] sm:tracking-[0.2em] uppercase text-gold-400 font-bold mb-3">
-            {company.category}
-          </p>
-          <h1 className="font-serif font-black text-white text-4xl sm:text-5xl md:text-7xl leading-tight">
-            {company.name}
-          </h1>
-          <p className="mt-3 sm:mt-4 text-lg sm:text-xl md:text-2xl font-semibold" style={{ color: company.color }}>
-            {company.tagline}
-          </p>
-          <p className="mt-4 sm:mt-7 max-w-3xl text-gray-300 text-sm sm:text-base md:text-lg leading-relaxed">
-            {company.longDesc || company.desc}
-          </p>
-          <div className="mt-6 sm:mt-8 flex flex-wrap gap-2 sm:gap-3">
-            <span
-              className="inline-flex px-3 sm:px-4 py-2 rounded text-xs sm:text-sm font-bold"
-              style={{ background: `${company.color}20`, color: company.color }}
-            >
-              {company.stats}
-            </span>
-            <span className="inline-flex px-3 sm:px-4 py-2 rounded bg-white/10 text-gray-200 text-xs sm:text-sm">
-              {company.category}
-            </span>
+
+          <div className="relative mt-2 sm:mt-4 lg:mt-0">
+            <div className="absolute inset-4 rounded-3xl blur-2xl opacity-30" style={{ background: company.color }} />
+            <div className="relative rounded-3xl border border-slate-400/30 bg-slate-700/45 backdrop-blur-md p-4 min-[380px]:p-6 sm:p-9">
+              <div className="mx-auto flex h-32 w-full max-w-[220px] items-center justify-center overflow-hidden rounded-2xl border border-white/20 bg-[#8d9995] p-5 shadow-2xl sm:h-36">
+                {company.iconImage ? (
+                  <Image
+                    src={company.iconImage}
+                    alt={`${company.name} logo`}
+                    width={220}
+                    height={140}
+                    priority
+                    sizes="(max-width: 640px) 188px, 220px"
+                    className="max-h-full w-auto max-w-full object-contain drop-shadow-[0_2px_2px_rgba(0,0,0,0.35)]"
+                  />
+                ) : (
+                  <span className="text-3xl font-black" style={{ color: company.color }}>{company.icon}</span>
+                )}
+              </div>
+              <div className="mt-10 grid grid-cols-1 gap-3 text-center min-[380px]:grid-cols-2 sm:mt-8">
+                <div className="rounded-xl border border-slate-300/20 bg-slate-900/35 p-4">
+                  <p className="text-lg font-black text-gold-400">{company.stats}</p>
+                  <p className="mt-1 text-[9px] uppercase tracking-wider text-slate-300">Key Strength</p>
+                </div>
+                <div className="rounded-xl border border-slate-300/20 bg-slate-900/35 p-4">
+                  <p className="text-lg font-black text-slate-50">{company.founded || 'India'}</p>
+                  <p className="mt-1 text-[9px] uppercase tracking-wider text-slate-300">{company.founded ? 'Founded' : 'Market'}</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="bg-slate-50 py-12 sm:py-20 px-4 sm:px-6 md:px-10">
-        <div className="max-w-6xl mx-auto grid lg:grid-cols-3 gap-4 sm:gap-6">
-          <article className="lg:col-span-2 bg-white border border-slate-200 rounded-xl p-5 sm:p-8">
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-navy-700 mb-4">About {company.name}</h2>
-            <p className="text-sm sm:text-base text-gray-700 leading-relaxed mb-4">{company.desc}</p>
+      <section id="company-overview" className="bg-slate-50 py-14 sm:py-20 px-4 sm:px-6 md:px-10">
+        <div className="max-w-6xl mx-auto grid lg:grid-cols-[1fr_340px] gap-6 sm:gap-8">
+          <article className="space-y-6">
+            <div className="bg-white border border-slate-200 rounded-2xl p-5 min-[380px]:p-6 sm:p-9 shadow-sm">
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gold-600 mb-3">Company Overview</p>
+              <h2 className="font-serif text-2xl min-[380px]:text-3xl sm:text-4xl font-black text-navy-800 mb-5 break-words">About {company.name}</h2>
+              <p className="text-sm sm:text-base text-slate-600 leading-7">{company.desc}</p>
+            </div>
 
             {company.highlights?.length ? (
-              <>
-                <h3 className="text-lg sm:text-xl font-bold text-navy-700 mt-8 mb-3">Highlights</h3>
-                <ul className="space-y-2">
+              <div className="bg-[#303b39] rounded-2xl border border-slate-500/25 p-5 min-[380px]:p-6 sm:p-9">
+                <h3 className="font-serif text-xl min-[380px]:text-2xl font-black text-white mb-5 break-words">Why {company.name}</h3>
+                <div className="grid sm:grid-cols-2 gap-3">
                   {company.highlights.map((point) => (
-                    <li key={point} className="text-gray-700 text-sm sm:text-base flex gap-2">
-                      <span className="text-gold-600 mt-1">•</span>
-                      <span>{point}</span>
-                    </li>
+                    <div key={point} className="flex gap-3 rounded-xl border border-slate-400/20 bg-slate-800/35 p-4">
+                      <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gold-500/15 text-xs font-black text-gold-400">+</span>
+                      <span className="text-sm leading-relaxed text-slate-200">{point}</span>
+                    </div>
                   ))}
-                </ul>
-              </>
+                </div>
+              </div>
             ) : null}
 
             {company.offerings?.length ? (
-              <>
-                <h3 className="text-lg sm:text-xl font-bold text-navy-700 mt-8 mb-3">Key Offerings</h3>
-                <div className="flex flex-wrap gap-2">
-                  {company.offerings.map((item) => (
-                    <span
-                      key={item}
-                      className="px-3 py-1.5 rounded-full bg-slate-100 text-slate-700 text-xs sm:text-sm border border-slate-200"
-                    >
-                      {item}
-                    </span>
+              <div className="bg-white border border-slate-200 rounded-2xl p-5 min-[380px]:p-6 sm:p-9 shadow-sm">
+                <h3 className="font-serif text-2xl font-black text-navy-800 mb-5">Products & Solutions</h3>
+                <div className="grid sm:grid-cols-2 gap-3">
+                  {company.offerings.map((item, index) => (
+                    <div key={item} className="flex gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4">
+                      <span className="text-xs font-black text-gold-600">{String(index + 1).padStart(2, '0')}</span>
+                      <span className="text-sm font-semibold leading-relaxed text-navy-700">{item}</span>
+                    </div>
                   ))}
                 </div>
-              </>
+              </div>
             ) : null}
 
             {company.audience?.length ? (
-              <>
-                <h3 className="text-lg sm:text-xl font-bold text-navy-700 mt-8 mb-3">Primary Audience</h3>
+              <div className="bg-white border border-slate-200 rounded-2xl p-5 min-[380px]:p-6 sm:p-9 shadow-sm">
+                <h3 className="font-serif text-2xl font-black text-navy-800 mb-5">Built For</h3>
                 <div className="flex flex-wrap gap-2">
                   {company.audience.map((item) => (
                     <span
                       key={item}
-                      className="px-3 py-1.5 rounded-full text-xs sm:text-sm border"
-                      style={{ borderColor: `${company.color}40`, color: company.color, background: `${company.color}12` }}
+                      className="rounded-full border px-4 py-2 text-xs font-bold"
+                      style={{ borderColor: `${company.color}35`, color: company.color, background: `${company.color}0D` }}
                     >
                       {item}
                     </span>
                   ))}
                 </div>
-              </>
+              </div>
             ) : null}
           </article>
 
-          <aside className="bg-white border border-slate-200 rounded-xl p-5 sm:p-8 lg:sticky lg:top-24 h-fit">
-            <h3 className="text-lg sm:text-xl font-extrabold text-navy-700 mb-4">Company Details</h3>
-            <dl className="space-y-4 text-sm">
-              <div><dt className="text-gray-500 uppercase tracking-wider text-[10px]">Category</dt><dd className="text-navy-700 font-semibold break-words">{company.category}</dd></div>
-              <div><dt className="text-gray-500 uppercase tracking-wider text-[10px]">Company ID</dt><dd className="text-navy-700 font-semibold break-words">{company.id}</dd></div>
-              <div><dt className="text-gray-500 uppercase tracking-wider text-[10px]">Icon Code</dt><dd className="text-navy-700 font-semibold break-words">{company.icon}</dd></div>
-              <div><dt className="text-gray-500 uppercase tracking-wider text-[10px]">Brand Color</dt><dd className="text-navy-700 font-semibold break-words">{company.color}</dd></div>
-              <div><dt className="text-gray-500 uppercase tracking-wider text-[10px]">Key Stat</dt><dd className="text-navy-700 font-semibold break-words">{company.stats}</dd></div>
-              <div>
-                <dt className="text-gray-500 uppercase tracking-wider text-[10px]">Website</dt>
-                <dd>
-                  <a
-                    href={company.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-block w-full text-center sm:w-auto sm:text-left text-gold-600 hover:text-gold-700 font-semibold border border-gold-500/30 rounded px-3 py-2"
-                  >
-                    Visit Official Site
-                  </a>
-                </dd>
-              </div>
-              {company.founded ? <div><dt className="text-gray-500 uppercase tracking-wider text-[10px]">Founded</dt><dd className="text-navy-700 font-semibold break-words">{company.founded}</dd></div> : null}
-              {company.headquarters ? <div><dt className="text-gray-500 uppercase tracking-wider text-[10px]">Headquarters</dt><dd className="text-navy-700 font-semibold break-words">{company.headquarters}</dd></div> : null}
-              {company.parentGroup ? <div><dt className="text-gray-500 uppercase tracking-wider text-[10px]">Parent Group</dt><dd className="text-navy-700 font-semibold break-words">{company.parentGroup}</dd></div> : null}
-              {company.geographicReach ? <div><dt className="text-gray-500 uppercase tracking-wider text-[10px]">Geographic Reach</dt><dd className="text-navy-700 font-semibold break-words">{company.geographicReach}</dd></div> : null}
-              {company.contactInfo ? <div><dt className="text-gray-500 uppercase tracking-wider text-[10px]">Contact Info</dt><dd className="text-navy-700 font-semibold break-words">{company.contactInfo}</dd></div> : null}
-              {company.socialProof ? <div><dt className="text-gray-500 uppercase tracking-wider text-[10px]">Social Proof</dt><dd className="text-navy-700 font-semibold break-words">{company.socialProof}</dd></div> : null}
-              <div><dt className="text-gray-500 uppercase tracking-wider text-[10px]">Internal Record</dt><dd className="text-navy-700 font-semibold">{company.internal ? 'Yes' : 'No'}</dd></div>
+          <aside className="h-fit min-w-0 rounded-2xl border border-slate-500/25 bg-[#303b39] p-5 min-[380px]:p-6 sm:p-7 lg:sticky lg:top-24">
+            <h3 className="font-serif text-2xl font-black text-white">At a Glance</h3>
+            <dl className="mt-6 divide-y divide-white/10 text-sm">
+              <div className="py-4"><dt className="text-[10px] uppercase tracking-widest text-white/45">Industry</dt><dd className="mt-1 font-bold text-white break-words">{company.category}</dd></div>
+              <div className="py-4"><dt className="text-[10px] uppercase tracking-widest text-white/45">Key Strength</dt><dd className="mt-1 font-bold text-gold-400 break-words">{company.stats}</dd></div>
+              {company.founded ? <div className="py-4"><dt className="text-[10px] uppercase tracking-widest text-white/45">Established</dt><dd className="mt-1 font-bold text-white">{company.founded}</dd></div> : null}
+              {company.geographicReach ? <div className="py-4"><dt className="text-[10px] uppercase tracking-widest text-slate-400">Market Reach</dt><dd className="mt-1 leading-relaxed text-slate-200">{company.geographicReach}</dd></div> : null}
+              {company.headquarters ? <div className="py-4"><dt className="text-[10px] uppercase tracking-widest text-slate-400">Headquarters</dt><dd className="mt-1 leading-relaxed text-slate-200">{company.headquarters}</dd></div> : null}
+              {company.parentGroup ? <div className="py-4"><dt className="text-[10px] uppercase tracking-widest text-white/45">Part of</dt><dd className="mt-1 font-bold text-white">{company.parentGroup}</dd></div> : null}
             </dl>
+            <a
+              href={company.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 inline-flex min-h-12 w-full items-center justify-center rounded-lg bg-gold-500 px-5 text-xs font-black uppercase tracking-widest text-white hover:bg-gold-400 transition-colors"
+            >
+              Visit Website -&gt;
+            </a>
           </aside>
         </div>
       </section>
 
       {company.businessModel?.length || company.certifications?.length || company.notableClients?.length || company.keyFacts?.length ? (
-        <section className="bg-white py-10 sm:py-14 px-4 sm:px-6 md:px-10 border-t border-slate-200">
+        <section className="bg-white py-14 sm:py-20 px-4 sm:px-6 md:px-10 border-t border-slate-200">
           <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-4 sm:gap-6">
             {company.businessModel?.length ? (
-              <article className="bg-slate-50 border border-slate-200 rounded-xl p-5 sm:p-6">
-                <h3 className="text-lg font-bold text-navy-700 mb-3">Business Model</h3>
-                <ul className="space-y-2">
+              <article className="bg-slate-50 border border-slate-200 rounded-2xl p-6 sm:p-8">
+                <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-gold-600 mb-2">How It Works</p>
+                <h3 className="font-serif text-2xl font-black text-navy-800 mb-5">Business Model</h3>
+                <ul className="space-y-3">
                   {company.businessModel.map((item) => (
-                    <li key={item} className="text-sm text-gray-700 flex gap-2">
-                      <span className="text-gold-600">•</span>
+                    <li key={item} className="text-sm text-slate-600 flex gap-3">
+                      <span className="text-gold-600 font-black">+</span>
                       <span>{item}</span>
                     </li>
                   ))}
@@ -291,12 +315,13 @@ export default function CompanyDetailPage({ params }: CompanyDetailPageProps) {
             ) : null}
 
             {company.keyFacts?.length ? (
-              <article className="bg-slate-50 border border-slate-200 rounded-xl p-5 sm:p-6">
-                <h3 className="text-lg font-bold text-navy-700 mb-3">Key Facts</h3>
-                <ul className="space-y-2">
+              <article className="bg-navy-900 rounded-2xl p-6 sm:p-8">
+                <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-gold-400 mb-2">Good to Know</p>
+                <h3 className="font-serif text-2xl font-black text-white mb-5">Key Facts</h3>
+                <ul className="space-y-3">
                   {company.keyFacts.map((item) => (
-                    <li key={item} className="text-sm text-gray-700 flex gap-2">
-                      <span className="text-gold-600">•</span>
+                    <li key={item} className="text-sm text-navy-100/75 flex gap-3">
+                      <span className="text-gold-400 font-black">+</span>
                       <span>{item}</span>
                     </li>
                   ))}
@@ -308,17 +333,17 @@ export default function CompanyDetailPage({ params }: CompanyDetailPageProps) {
       ) : null}
 
       {company.sourceUrls?.length ? (
-        <section className="bg-white py-10 px-4 sm:px-6 md:px-10">
+        <section className="bg-slate-100 py-8 px-4 sm:px-6 md:px-10 border-t border-slate-200">
           <div className="max-w-6xl mx-auto">
-            <h3 className="text-lg font-bold text-navy-700 mb-3">Data Sources</h3>
-            <div className="flex flex-wrap gap-2">
+            <h3 className="text-xs font-bold uppercase tracking-[0.18em] text-navy-700 mb-3">Official Links</h3>
+            <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2">
               {company.sourceUrls.map((url) => (
                 <a
                   key={url}
                   href={url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs sm:text-sm px-3 py-1.5 rounded border border-slate-200 text-slate-600 hover:text-gold-600 hover:border-gold-500/40 break-all"
+                  className="block w-full sm:w-auto max-w-full text-xs px-3 py-2 rounded-lg border border-slate-300 bg-white text-slate-600 hover:text-gold-600 hover:border-gold-500/40 break-all transition-colors"
                 >
                   {url}
                 </a>
