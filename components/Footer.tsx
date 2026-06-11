@@ -8,7 +8,9 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7 sm:gap-9 lg:gap-12">
           <div>
-            <Logo size="lg" />
+            <div className="inline-flex rounded-xl bg-white p-2">
+              <Logo size="lg" />
+            </div>
             <p className="mt-3 sm:mt-4 text-[9px] sm:text-[11px] tracking-[0.18em] sm:tracking-[0.3em] uppercase text-gold-500 break-words">
               {FOOTER_CONTENT.tagline}
             </p>
